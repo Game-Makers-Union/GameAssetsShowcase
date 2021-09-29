@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class CameraController : MonoBehaviour
 {
     private bool autoRotate = true;
-    private const float autoRotateSpeed = 1f;
+    private const float autoRotateSpeed = 0.5f;
 
     private const float manualRotateSpeed = 5f;
 
@@ -13,8 +14,10 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Material floorLight;
     [SerializeField] private Color32 cameraDark;
     [SerializeField] private Color32 cameraLight;
+    [SerializeField] private PostProcessVolume postProcessVolume;
 
     [SerializeField] private Toggle darkModeToggle;
+    [SerializeField] private Toggle postProcessingToggle;
     [SerializeField] private Slider cameraFOVSlider;
 
     private void Start()
@@ -42,6 +45,11 @@ public class CameraController : MonoBehaviour
     public void SetCameraFOV()
     {
         Camera.main.fieldOfView = cameraFOVSlider.value;
+    }
+
+    public void SetPostProcessing()
+    {
+        postProcessVolume.enabled = postProcessingToggle.isOn;
     }
 
     public void ResetRotation()
